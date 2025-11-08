@@ -1,16 +1,16 @@
-.header-sect {
+header {
     display: flex;
     flex-direction: column;
     text-align: center;
 }
 
-.header-sect h1 {
+.header h1 {
     font-weight: 500;
     font-size: 26px;
     color: #F9F4DA
 }
 
-.header-sect p {
+.header p {
     font-size: 14px;
     color: #8E8E8E;
 }
