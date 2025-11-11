@@ -14,3 +14,19 @@ header {
     font-size: 14px;
     color: #8E8E8E;
 }
+
+.game-status {
+    margin: 20px 0 20px 0;
+    background-color: #10A95B;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    border: none;
+    border-radius: 6px;
+    color: #F9F4DA;
+}
+
+.game-status h2 {
+    margin-bottom: 0;
+}
