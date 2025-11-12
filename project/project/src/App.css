@@ -30,3 +30,15 @@ header {
 .game-status h2 {
     margin-bottom: 0;
 }
+
+.chips-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.chips-item {
+    padding: 5px;
+    border-radius: 6px;
+}
