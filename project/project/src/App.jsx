@@ -6,6 +6,14 @@ import "./App.css";
 
 export default function App() {
 
+    const [currentWord, setCurrentWord] = React.useState("react")
+
+    const wordArr = currentWord.toUpperCase().split('').map((letter, index) => {
+        return (
+            <span key={index} className="letter-box-items">{letter}</span>
+        )
+    })
+
     return(
         <main>
             <Header
@@ -14,6 +22,9 @@ export default function App() {
             />
             <Status />
             <LanguageChips />
+            <section className="letter-box">
+                {wordArr}
+            </section>
         </main>
     )
 }
