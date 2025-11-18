@@ -27,6 +27,7 @@ export default function App() {
                 {wordArr}
             </section>
             <Keyboard />
+            <button className="new-game">New Game</button>
         </main>
     )
 }
