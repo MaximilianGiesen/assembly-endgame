@@ -61,3 +61,21 @@ header {
     background-color: #323232;
     font-size: 1.125rem;
 }
+
+.keyboard-btn {
+    background-color: #FCBA29;
+    border: 1px solid #D7D7D7;
+    border-radius: 4px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.keyboard-section {
+    width: 500px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin: 36px auto;
+}

@@ -2,6 +2,7 @@ import React from "react"
 import Header from "./components/Header.jsx"
 import Status from "./components/Status.jsx"
 import LanguageChips from "./components/LanguageChips.jsx";
+import Keyboard from "./components/Keyboard.jsx";
 import "./App.css";
 
 export default function App() {
@@ -25,6 +26,7 @@ export default function App() {
             <section className="letter-box">
                 {wordArr}
             </section>
+            <Keyboard />
         </main>
     )
 }
