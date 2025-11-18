@@ -33,7 +33,7 @@ export default function App() {
                 {wordArr}
             </section>
             <Keyboard
-                onClick={() => addGuessedLetter(letter)}
+                addGuessedLetter = {addGuessedLetter}
             />
             <button className="new-game">New Game</button>
         </main>

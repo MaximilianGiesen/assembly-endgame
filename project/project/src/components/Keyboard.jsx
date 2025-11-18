@@ -1,11 +1,17 @@
 import React from "react";
 
-export default function Keyboard() {
+export default function Keyboard(props) {
 
     const alphabet = "abcdefghijklmnopqrstuvwxyz"
-    const keyboardBtns = alphabet.toUpperCase().split('').map((btn, index) => {
+    const keyboardBtns = alphabet.toUpperCase().split('').map((letter, index) => {
         return (
-            <button key={index} className="keyboard-btn">{btn}</button>
+            <button
+                key={index}
+                className="keyboard-btn"
+                onClick={() => props.addGuessedLetter(letter)}
+            >
+                {letter}
+            </button>
         )
     })
 
