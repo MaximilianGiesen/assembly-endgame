@@ -13,7 +13,9 @@ export default function App() {
 
     const addGuessedLetter = (letter) => {
         setGuessedLetters(prevLetters =>
-            prevLetters.includes(letter) ? prevLetters : [...prevLetters, letter]
+            prevLetters.includes(letter) ?
+                prevLetters :
+                [...prevLetters, letter]
         )
     }
 
