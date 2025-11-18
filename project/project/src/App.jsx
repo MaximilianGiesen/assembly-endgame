@@ -12,7 +12,9 @@ export default function App() {
     console.log(guessedLetters)
 
     const addGuessedLetter = (letter) => {
-        setGuessedLetters(prevLetters => [...prevLetters, letter])
+        setGuessedLetters(prevLetters =>
+            prevLetters.includes(letter) ? prevLetters : [...prevLetters, letter]
+        )
     }
 
     const wordArr = currentWord.toUpperCase().split('').map((letter, index) => {
