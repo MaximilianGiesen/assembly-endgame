@@ -72,7 +72,7 @@ header {
 }
 
 .keyboard-section {
-    width: 500px;
+    max-width: 500px;
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
