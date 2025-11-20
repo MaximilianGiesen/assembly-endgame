@@ -103,10 +103,3 @@ button.wrong {
     border: 1px solid #D7D7D7;
     border-radius: 4px;
 }
-
-.wrong-guesses-sect {
-    display: flex;
-    flex-direction: row;
-    padding: 25px;
-    justify-content: center;
-}

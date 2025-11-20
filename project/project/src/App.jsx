@@ -11,7 +11,8 @@ export default function App() {
     const [guessedLetters, setGuessedLetters] = React.useState([])
 
     // Derived Values
-    const wrongGuessCount = guessedLetters.filter((guess) => !currentWord.includes(guess)).length
+    const wrongGuessCount = guessedLetters.filter(guess => !currentWord.includes(guess)).length
+    console.log(wrongGuessCount)
 
     const addGuessedLetter = (letter) => {
 
@@ -36,9 +37,6 @@ export default function App() {
                 intro="Guess the word in under 8 attempts to keep the programming world safe from Assembly!"
             />
             <Status />
-            <section className="wrong-guesses-sect">
-                <p>wrong guesses: {wrongGuessCount}</p>
-            </section>
             <LanguageChips />
             <section className="letter-box">
                 {wordArr}
