@@ -9,12 +9,9 @@ export default function App() {
 
     const [currentWord, setCurrentWord] = React.useState("react")
     const [guessedLetters, setGuessedLetters] = React.useState([])
-    const [correctLetter, setCorrectLetter] = React.useState({})
-    const [wrongLetter, setWrongLetter] = React.useState({})
+
 
     const addGuessedLetter = (letter) => {
-
-        const isCorrect = currentWord.toUpperCase().includes(letter)
 
         setGuessedLetters(prevLetters =>
             prevLetters.includes(letter) ?
@@ -22,11 +19,6 @@ export default function App() {
                 [...prevLetters, letter]
         )
 
-        if (isCorrect) {
-            setCorrectLetter(prevLetter => ({ ...prevLetter, [letter]: true }))
-        } else {
-            setWrongLetter(prevLetter => ({ ...prevLetter, [letter]: true }))
-        }
     }
 
     const wordArr = currentWord.toUpperCase().split('').map((letter, index) => {
@@ -48,8 +40,7 @@ export default function App() {
             </section>
             <Keyboard
                 addGuessedLetter = {addGuessedLetter}
-                correctLetter = {correctLetter}
-                wrongLetter = {wrongLetter}
+                currentWord = {currentWord}
                 guessedLetters = {guessedLetters}
             />
             <button className="new-game">New Game</button>
