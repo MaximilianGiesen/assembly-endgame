@@ -21,17 +21,11 @@ export default function App() {
 
     }
 
-    const wordArr = currentWord.split('').map((letter, index) => {
-        if (guessedLetters.includes(letter)) {
-            return (
-                <span key={index} className="letter-box-items">{letter.toUpperCase()}</span>
-            )
-        } else {
-            return (
-                <span key={index} className="letter-box-items"></span>
-            )
-        }
-    })
+    const wordArr = currentWord.split('').map((letter, index) => (
+        <span key={index} className="letter-box-items">
+            {guessedLetters.includes(letter.toUpperCase()) ? letter.toUpperCase() : ''}
+        </span>
+    ))
 
     return(
         <main>
