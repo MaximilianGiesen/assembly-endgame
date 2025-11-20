@@ -22,9 +22,11 @@ export default function App() {
     }
 
     const wordArr = currentWord.toUpperCase().split('').map((letter, index) => {
-        return (
-            <span key={index} className="letter-box-items">{letter}</span>
-        )
+        if (guessedLetters.includes(letter)) {
+            return (
+                <span key={index} className="letter-box-items">{letter}</span>
+            )
+        }
     })
 
     return(
