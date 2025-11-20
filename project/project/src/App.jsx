@@ -6,10 +6,12 @@ import Keyboard from "./components/Keyboard.jsx";
 import "./App.css";
 
 export default function App() {
-
+    // State values
     const [currentWord, setCurrentWord] = React.useState("react")
     const [guessedLetters, setGuessedLetters] = React.useState([])
 
+    // Derived Values
+    const wrongGuessCount = guessedLetters.filter((guess) => !currentWord.includes(guess)).length
 
     const addGuessedLetter = (letter) => {
 
@@ -34,6 +36,9 @@ export default function App() {
                 intro="Guess the word in under 8 attempts to keep the programming world safe from Assembly!"
             />
             <Status />
+            <section className="wrong-guesses-sect">
+                <p>wrong guesses: {wrongGuessCount}</p>
+            </section>
             <LanguageChips />
             <section className="letter-box">
                 {wordArr}
