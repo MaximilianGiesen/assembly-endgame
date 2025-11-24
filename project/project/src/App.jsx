@@ -37,7 +37,9 @@ export default function App() {
                 intro="Guess the word in under 8 attempts to keep the programming world safe from Assembly!"
             />
             <Status />
-            <LanguageChips />
+            <LanguageChips
+                wrongGuessCount = {wrongGuessCount}
+            />
             <section className="letter-box">
                 {wordArr}
             </section>

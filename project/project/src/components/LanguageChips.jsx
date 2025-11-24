@@ -1,15 +1,17 @@
 import React from "react";
 import {languages} from "../languages.js";
 
-export default function LanguageChips() {
-    const languageElements = languages.map((language) => {
+export default function LanguageChips(props) {
+    const languageElements = languages.map((language, index) => {
+        const isLanguageLost = index < props.wrongGuessCount
+
         const styles = {
             backgroundColor: language.backgroundColor,
             color: language.color
         }
 
         return (
-                <span key={language.name} className="chips-item" style={styles}>{language.name}</span>
+                <span key={language.name} className={`chips-item ${isLanguageLost ? 'lost' : ''}`} style={styles}>{language.name}</span>
             )
         }
     )
