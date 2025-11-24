@@ -11,7 +11,7 @@ export default function LanguageChips(props) {
         }
 
         return (
-                <span key={language.name} className={`chip ${isLanguageLost ? 'lost' : ''}`} style={styles}>{language.name}</span>
+                <span key={language.name} className={`chip ${isLanguageLost && 'lost'}`} style={styles}>{language.name}</span>
             )
         }
     )
