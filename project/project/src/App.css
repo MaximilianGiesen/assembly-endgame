@@ -38,7 +38,8 @@ header {
     justify-content: center;
 }
 
-.chips-item {
+.chip {
+    position: relative;
     padding: 5px;
     border-radius: 6px;
 }
