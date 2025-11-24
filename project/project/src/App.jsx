@@ -3,6 +3,7 @@ import Header from "./components/Header.jsx"
 import Status from "./components/Status.jsx"
 import LanguageChips from "./components/LanguageChips.jsx";
 import Keyboard from "./components/Keyboard.jsx";
+import {languages} from "./languages.js";
 import "./App.css";
 
 export default function App() {
@@ -22,6 +23,12 @@ export default function App() {
         )
 
     }
+
+    const hasWon = currentWord
+        .split('')
+        .every(letter => guessedLetters.includes(letter))
+
+    const isGameOver = wrongGuessCount >= languages.length - 1 || hasWon
 
     const wordArr = currentWord.split('').map((letter, index) => (
         <span key={index} className="letter-box-items">
@@ -47,7 +54,9 @@ export default function App() {
                 currentWord = {currentWord}
                 guessedLetters = {guessedLetters}
             />
-            <button className="new-game">New Game</button>
+            {
+                isGameOver && <button className="new-game">New Game</button>
+            }
         </main>
     )
 }
