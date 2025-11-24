@@ -12,7 +12,6 @@ export default function App() {
 
     // Derived Values
     const wrongGuessCount = guessedLetters.filter(guess => !currentWord.includes(guess)).length
-    console.log(wrongGuessCount)
 
     const addGuessedLetter = (letter) => {
 
