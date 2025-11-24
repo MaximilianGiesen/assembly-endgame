@@ -17,7 +17,6 @@ header {
 
 .game-status {
     margin: 20px 0 20px 0;
-    background-color: #10A95B;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -25,6 +24,14 @@ header {
     border: none;
     border-radius: 6px;
     color: #F9F4DA;
+}
+
+.game-won {
+    background-color: #10A95B;
+}
+
+.game-lost {
+    background-color: #BA2A2A;
 }
 
 .game-status h2 {
