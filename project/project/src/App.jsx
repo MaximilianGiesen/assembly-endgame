@@ -24,11 +24,11 @@ export default function App() {
 
     }
 
-    const hasWon = currentWord
+    const isGameWon = currentWord
         .split('')
         .every(letter => guessedLetters.includes(letter))
 
-    const isGameOver = wrongGuessCount >= languages.length - 1 || hasWon
+    const isGameOver = wrongGuessCount >= languages.length - 1 || isGameWon
 
     const wordArr = currentWord.split('').map((letter, index) => (
         <span key={index} className="letter-box-items">
