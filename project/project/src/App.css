@@ -21,6 +21,7 @@ header {
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
+    min-height: 120px;
     border: none;
     border-radius: 6px;
     color: #F9F4DA;

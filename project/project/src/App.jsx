@@ -23,12 +23,10 @@ export default function App() {
 
     }
 
-    const isGameWon = currentWord
-        .split('')
-        .every(letter => guessedLetters.includes(letter))
-
+    const isGameWon =
+        currentWord.split("").every(letter => guessedLetters.includes(letter.toUpperCase()))
     const isGameLost = wrongGuessCount >= languages.length - 1
-    const isGameOver =  isGameLost || isGameWon
+    const isGameOver = isGameWon || isGameLost
 
     const wordArr = currentWord.split('').map((letter, index) => (
         <span key={index} className="letter-box-items">
@@ -42,18 +40,20 @@ export default function App() {
                 heading="Assembly: Endgame"
                 intro="Guess the word in under 8 attempts to keep the programming world safe from Assembly!"
             />
-            {isGameWon &&
-                <section className="game-status game-won">
-                    <h2>You win!</h2>
-                    <p>Well done! 🎉</p>
-                </section>
-            }
-            {isGameOver &&
-                <section className="game-status game-lost">
-                    <h2>Game over!</h2>
-                    <p>You lose! Better start learning Assembly 😭</p>
-                </section>
-            }
+            <section className={`game-status ${isGameWon ? 'game-won' : isGameLost ? 'game-lost' : ''}`}>
+                {isGameWon &&
+                    <>
+                        <h2>You win!</h2>
+                        <p>Well done! 🎉</p>
+                    </>
+                }
+                {isGameLost &&
+                    <>
+                        <h2>Game over!</h2>
+                        <p>You lose! Better start learning Assembly 😭</p>
+                    </>
+                }
+            </section>
             <LanguageChips
                 wrongGuessCount = {wrongGuessCount}
             />
