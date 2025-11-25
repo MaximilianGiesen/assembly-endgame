@@ -24,8 +24,12 @@ export default function App() {
     }
 
     const isGameWon =
-        currentWord.split("").every(letter => guessedLetters.includes(letter.toUpperCase()))
+        currentWord
+            .split("")
+            .every(letter => guessedLetters.includes(letter.toUpperCase()))
+
     const isGameLost = wrongGuessCount >= languages.length - 1
+
     const isGameOver = isGameWon || isGameLost
 
     const wordArr = currentWord.split('').map((letter, index) => (
