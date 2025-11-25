@@ -41,17 +41,19 @@ export default function App() {
                 intro="Guess the word in under 8 attempts to keep the programming world safe from Assembly!"
             />
             <section className={`game-status ${isGameWon ? 'game-won' : isGameLost ? 'game-lost' : ''}`}>
-                {isGameWon &&
-                    <>
-                        <h2>You win!</h2>
-                        <p>Well done! 🎉</p>
-                    </>
-                }
-                {isGameLost &&
-                    <>
-                        <h2>Game over!</h2>
-                        <p>You lose! Better start learning Assembly 😭</p>
-                    </>
+                {isGameOver ? (
+                    isGameWon ? (
+                        <>
+                            <h2>You win!</h2>
+                            <p>Well done! 🎉</p>
+                        </>
+                    ) : (
+                        <>
+                            <h2>Game over!</h2>
+                            <p>You lose! Better start learning Assembly 😭</p>
+                        </>
+                    )
+                ) : null
                 }
             </section>
             <LanguageChips
