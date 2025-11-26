@@ -26,9 +26,11 @@ export default function App() {
     const isGameWon =
         currentWord
             .split("")
-            .every(letter => guessedLetters.includes(letter.toUpperCase()))
+            .every(letter =>
+                guessedLetters.includes(letter.toUpperCase())
+            )
 
-    const isGameLost = wrongGuessCount >= languages.length - 1
+    const isGameLost = wrongGuessCount >= languages.length -1
 
     const isGameOver = isGameWon || isGameLost
 
@@ -38,6 +40,28 @@ export default function App() {
         </span>
     ))
 
+    function renderGameStatus() {
+        if (!isGameOver) {
+            return null
+        }
+
+        if (isGameWon) {
+            return (
+                <>
+                    <h2>You win!</h2>
+                    <p>Well done! 🎉</p>
+                </>
+            )
+        } else {
+            return (
+                <>
+                    <h2>Game over!</h2>
+                    <p>You lose! Better start learning Assembly 😭</p>
+                </>
+            )
+        }
+    }
+
     return(
         <main>
             <Header
@@ -45,20 +69,7 @@ export default function App() {
                 intro="Guess the word in under 8 attempts to keep the programming world safe from Assembly!"
             />
             <section className={`game-status ${isGameWon ? 'game-won' : isGameLost ? 'game-lost' : ''}`}>
-                {isGameOver ? (
-                    isGameWon ? (
-                        <>
-                            <h2>You win!</h2>
-                            <p>Well done! 🎉</p>
-                        </>
-                    ) : (
-                        <>
-                            <h2>Game over!</h2>
-                            <p>You lose! Better start learning Assembly 😭</p>
-                        </>
-                    )
-                ) : null
-                }
+                {renderGameStatus()}
             </section>
             <LanguageChips
                 wrongGuessCount = {wrongGuessCount}
@@ -70,6 +81,7 @@ export default function App() {
                 addGuessedLetter = {addGuessedLetter}
                 currentWord = {currentWord}
                 guessedLetters = {guessedLetters}
+                isGameOver = {isGameOver}
             />
             {
                 isGameOver && <button className="new-game">New Game</button>
