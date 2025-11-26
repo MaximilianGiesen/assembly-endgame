@@ -20,6 +20,8 @@ export default function App() {
             )
     const isGameLost = wrongGuessCount >= languages.length -1
     const isGameOver = isGameWon || isGameLost
+    const lastGuessedLetter = guessedLetters[guessedLetters.length - 1]
+    const isLastGuessIncorrect = lastGuessedLetter && !currentWord.includes(lastGuessedLetter)
 
     // Static values
     const addGuessedLetter = (letter) => {
@@ -53,8 +55,8 @@ export default function App() {
     ))
 
     function renderGameStatus() {
-        if (!isGameOver) {
-            return null
+        if (!isGameOver && isLastGuessIncorrect) {
+            return <p className="farewell">{getFarewellText(languages[wrongGuessCount - 1].name)}</p>
         }
 
         if (isGameWon) {
@@ -64,7 +66,9 @@ export default function App() {
                     <p>Well done! 🎉</p>
                 </>
             )
-        } else {
+        }
+
+        if (isGameLost) {
             return (
                 <>
                     <h2>Game over!</h2>
@@ -72,23 +76,10 @@ export default function App() {
                 </>
             )
         }
+
+        return null
     }
 
-    function renderLostLanguages() {
-        if (wrongGuessCount === 0) {
-            return null
-        }
-
-        const lostLanguage = languages[wrongGuessCount - 1]
-        if (lostLanguage) {
-            return (
-                <div className="lost-languages-sect">
-                    <p>{getFarewellText(lostLanguage.name)}</p>
-                </div>
-            )
-        }
-
-    }
 
     return(
         <main>
@@ -96,10 +87,12 @@ export default function App() {
                 heading="Assembly: Endgame"
                 intro="Guess the word in under 8 attempts to keep the programming world safe from Assembly!"
             />
-            <section>
-                {renderLostLanguages()}
-            </section>
-            <section className={`game-status ${isGameWon ? 'game-won' : isGameLost ? 'game-lost' : ''}`}>
+            <section className={`game-status ${
+                isGameWon ? 'game-won' :
+                    isGameLost ? 'game-lost' :
+                        (!isGameOver && isLastGuessIncorrect) ? 'farewell' :
+                            ''
+            }`}>
                 {renderGameStatus()}
             </section>
             <section className="chips-list">
