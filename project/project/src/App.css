@@ -40,6 +40,10 @@ section.game-status.farewell {
     border: 1px dashed #323232;
 }
 
+section.game-status > p.farewell-message {
+    font-style: italic;
+    font-weight: 400;
+}
 
 .game-status h2 {
     margin-bottom: 0;
@@ -93,6 +97,11 @@ section.game-status.farewell {
     gap: 8px;
     justify-content: center;
     margin: 36px auto;
+}
+
+.disabled {
+    opacity: 0.5;
+    pointer-events: none;
 }
 
 button.new-game {

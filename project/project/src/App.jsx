@@ -21,7 +21,9 @@ export default function App() {
     const isGameLost = wrongGuessCount >= languages.length -1
     const isGameOver = isGameWon || isGameLost
     const lastGuessedLetter = guessedLetters[guessedLetters.length - 1]
-    const isLastGuessIncorrect = lastGuessedLetter && !currentWord.includes(lastGuessedLetter)
+    const isLastGuessIncorrect =
+        lastGuessedLetter &&
+        !currentWord.toUpperCase().includes(lastGuessedLetter)
 
     // Static values
     const addGuessedLetter = (letter) => {
@@ -56,10 +58,10 @@ export default function App() {
 
     function renderGameStatus() {
         const lostLanguage = languages[wrongGuessCount - 1]
-        if (!isGameOver && isLastGuessIncorrect) {
+        if (!isGameOver && isLastGuessIncorrect && wrongGuessCount > 0) {
             return (
                 <p
-                    className="farewell"
+                    className="farewell-message"
                 >
                     {getFarewellText(lostLanguage.name)}
                 </p>
