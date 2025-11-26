@@ -1,8 +1,8 @@
 import React from "react"
 import Header from "./components/Header.jsx"
-import LanguageChips from "./components/LanguageChips.jsx";
 import Keyboard from "./components/Keyboard.jsx";
 import {languages} from "./languages.js";
+import {getFarewellText} from "./utils.js";
 import "./App.css";
 
 export default function App() {
@@ -11,8 +11,17 @@ export default function App() {
     const [guessedLetters, setGuessedLetters] = React.useState([])
 
     // Derived Values
-    const wrongGuessCount = guessedLetters.filter(guess => !currentWord.includes(guess)).length
+    const wrongGuessCount = guessedLetters.filter(guess => !currentWord.toUpperCase().includes(guess)).length
+    const isGameWon =
+        currentWord
+            .split("")
+            .every(letter =>
+                guessedLetters.includes(letter.toUpperCase())
+            )
+    const isGameLost = wrongGuessCount >= languages.length -1
+    const isGameOver = isGameWon || isGameLost
 
+    // Static values
     const addGuessedLetter = (letter) => {
 
         setGuessedLetters(prevLetters =>
@@ -23,16 +32,19 @@ export default function App() {
 
     }
 
-    const isGameWon =
-        currentWord
-            .split("")
-            .every(letter =>
-                guessedLetters.includes(letter.toUpperCase())
+    const languageElements = languages.map((language, index) => {
+            const isLanguageLost = index < wrongGuessCount
+
+            const styles = {
+                backgroundColor: language.backgroundColor,
+                color: language.color
+            }
+
+            return (
+                <span key={language.name} className={`chip ${isLanguageLost && 'lost'}`} style={styles}>{language.name}</span>
             )
-
-    const isGameLost = wrongGuessCount >= languages.length -1
-
-    const isGameOver = isGameWon || isGameLost
+        }
+    )
 
     const wordArr = currentWord.split('').map((letter, index) => (
         <span key={index} className="letter-box-items">
@@ -62,18 +74,37 @@ export default function App() {
         }
     }
 
+    function renderLostLanguages() {
+        if (wrongGuessCount === 0) {
+            return null
+        }
+
+        const lostLanguage = languages[wrongGuessCount - 1]
+        if (lostLanguage) {
+            return (
+                <div className="lost-languages-sect">
+                    <p>{getFarewellText(lostLanguage.name)}</p>
+                </div>
+            )
+        }
+
+    }
+
     return(
         <main>
             <Header
                 heading="Assembly: Endgame"
                 intro="Guess the word in under 8 attempts to keep the programming world safe from Assembly!"
             />
+            <section>
+                {renderLostLanguages()}
+            </section>
             <section className={`game-status ${isGameWon ? 'game-won' : isGameLost ? 'game-lost' : ''}`}>
                 {renderGameStatus()}
             </section>
-            <LanguageChips
-                wrongGuessCount = {wrongGuessCount}
-            />
+            <section className="chips-list">
+                {languageElements}
+            </section>
             <section className="letter-box">
                 {wordArr}
             </section>
