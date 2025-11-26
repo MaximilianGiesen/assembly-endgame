@@ -18,6 +18,7 @@ export default function Keyboard(props) {
 
         return (
             <button
+                disabled={props.isGameOver}
                 key={index}
                 className={`keyboard-btn ${getButtonClass()}`}
                 onClick={() => props.addGuessedLetter(letter)}
@@ -28,7 +29,7 @@ export default function Keyboard(props) {
     })
 
     return (
-        <section className={`keyboard-section ${props.isGameOver && 'disabled'}`}>
+        <section className='keyboard-section' >
             {keyboardBtns}
         </section>
     )
