@@ -55,8 +55,15 @@ export default function App() {
     ))
 
     function renderGameStatus() {
+        const lostLanguage = languages[wrongGuessCount - 1]
         if (!isGameOver && isLastGuessIncorrect) {
-            return <p className="farewell">{getFarewellText(languages[wrongGuessCount - 1].name)}</p>
+            return (
+                <p
+                    className="farewell"
+                >
+                    {getFarewellText(lostLanguage.name)}
+                </p>
+            )
         }
 
         if (isGameWon) {
