@@ -2,15 +2,17 @@ import React from "react"
 import Header from "./components/Header.jsx"
 import Keyboard from "./components/Keyboard.jsx";
 import {languages} from "./languages.js";
-import {getFarewellText} from "./utils.js";
+import {getFarewellText, getRandomWord} from "./utils.js";
+import Confetti from 'react-confetti'
 import "./App.css";
 
 export default function App() {
     // State values
-    const [currentWord, setCurrentWord] = React.useState("react")
+    const [currentWord, setCurrentWord] = React.useState(getRandomWord())
     const [guessedLetters, setGuessedLetters] = React.useState([])
 
     // Derived Values
+
     const numberOfGuessesLeft = languages.length -1
     const wrongGuessCount = guessedLetters.filter(guess => !currentWord.toUpperCase().includes(guess)).length
     const isGameWon =
@@ -37,6 +39,11 @@ export default function App() {
 
     }
 
+    const startNewGame = () => {
+        setCurrentWord(getRandomWord())
+        setGuessedLetters([])
+    };
+
     const languageElements = languages.map((language, index) => {
             const isLanguageLost = index < wrongGuessCount
 
@@ -52,9 +59,13 @@ export default function App() {
     )
 
     const wordArr = currentWord.split('').map((letter, index) => (
-        <span key={index} className="letter-box-items">
-            {guessedLetters.includes(letter.toUpperCase()) ? letter.toUpperCase() : ''}
-        </span>
+        isGameOver ?
+            <span key={index} className={`letter-box-items ${guessedLetters.includes(letter.toUpperCase()) ? '' : 'missed-guess'}`}>
+                {letter.toUpperCase()}
+            </span> :
+            <span key={index} className="letter-box-items">
+                {guessedLetters.includes(letter.toUpperCase()) ? letter.toUpperCase() : ''}
+            </span>
     ))
 
     function renderGameStatus() {
@@ -93,6 +104,7 @@ export default function App() {
 
     return(
         <main>
+            {isGameWon && <Confetti />}
             <Header
                 heading="Assembly: Endgame"
                 intro="Guess the word in under 8 attempts to keep the programming world safe from Assembly!"
@@ -116,8 +128,7 @@ export default function App() {
             <section className="letter-box">
                 {wordArr}
             </section>
-
-            <!-- SR-ONLY -->
+            {/* Combined visually-hidden aria-live region for status updates */}
             <section
                 className="sr-only"
                 aria-live="polite"
@@ -142,7 +153,7 @@ export default function App() {
                 isGameOver = {isGameOver}
             />
             {
-                isGameOver && <button className="new-game">New Game</button>
+                isGameOver && <button className="new-game" onClick={startNewGame}>New Game</button>
             }
         </main>
     )
