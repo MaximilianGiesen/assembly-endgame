@@ -96,12 +96,17 @@ export default function App() {
                 heading="Assembly: Endgame"
                 intro="Guess the word in under 8 attempts to keep the programming world safe from Assembly!"
             />
-            <section className={`game-status ${
-                isGameWon ? 'game-won' :
-                    isGameLost ? 'game-lost' :
-                        (!isGameOver && isLastGuessIncorrect) ? 'farewell' :
-                            ''
-            }`}>
+            <section
+                aria-live="polite"
+                role="status"
+                className={`game-status ${
+                    isGameWon ? 'game-won' :
+                        isGameLost ? 'game-lost' :
+                            (!isGameOver && isLastGuessIncorrect) ? 'farewell' :
+                                ''
+                    }`
+                }
+            >
                 {renderGameStatus()}
             </section>
             <section className="chips-list">
@@ -109,6 +114,16 @@ export default function App() {
             </section>
             <section className="letter-box">
                 {wordArr}
+            </section>
+            <section
+                className="sr-only"
+                aria-live="polite"
+                role="status"
+            >
+                <p>Current Word: {currentWord.split("").map(letter =>
+                    guessedLetters.includes(letter) ? letter + "." : "blank.")
+                    .join(" ")}
+                </p>
             </section>
             <Keyboard
                 addGuessedLetter = {addGuessedLetter}

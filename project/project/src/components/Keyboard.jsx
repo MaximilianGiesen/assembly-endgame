@@ -19,6 +19,8 @@ export default function Keyboard(props) {
         return (
             <button
                 disabled={props.isGameOver}
+                aria-disabled={props.isGameOver}
+                aria-label={`Letter ${letter}`}
                 key={index}
                 className={`keyboard-btn ${getButtonClass()}`}
                 onClick={() => props.addGuessedLetter(letter)}
