@@ -116,6 +116,8 @@ export default function App() {
             <section className="letter-box">
                 {wordArr}
             </section>
+
+            <!-- SR-ONLY -->
             <section
                 className="sr-only"
                 aria-live="polite"
