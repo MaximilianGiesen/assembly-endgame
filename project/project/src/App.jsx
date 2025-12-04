@@ -11,6 +11,7 @@ export default function App() {
     const [guessedLetters, setGuessedLetters] = React.useState([])
 
     // Derived Values
+    const numberOfGuessesLeft = languages.length -1
     const wrongGuessCount = guessedLetters.filter(guess => !currentWord.toUpperCase().includes(guess)).length
     const isGameWon =
         currentWord
@@ -18,7 +19,7 @@ export default function App() {
             .every(letter =>
                 guessedLetters.includes(letter.toUpperCase())
             )
-    const isGameLost = wrongGuessCount >= languages.length -1
+    const isGameLost = wrongGuessCount >= numberOfGuessesLeft
     const isGameOver = isGameWon || isGameLost
     const lastGuessedLetter = guessedLetters[guessedLetters.length - 1]
     const isLastGuessIncorrect =
@@ -120,6 +121,13 @@ export default function App() {
                 aria-live="polite"
                 role="status"
             >
+                <p>
+                    {currentWord.includes(lastGuessedLetter) ?
+                        `Correct! The letter ${lastGuessedLetter} is in the word.` :
+                        `Sorry! The letter ${lastGuessedLetter} is not in the word.`
+                    }
+                    You have {numberOfGuessesLeft} guesses left
+                </p>
                 <p>Current Word: {currentWord.split("").map(letter =>
                     guessedLetters.includes(letter) ? letter + "." : "blank.")
                     .join(" ")}
